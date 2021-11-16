@@ -9,27 +9,27 @@ import Foundation
 
 final class HelpService {
 
-    // MARK: Private
+    // MARK: Private properties
 
-    private let flowCoordinator: FlowCoordinator
+    private let flowCoordinatorService: FlowCoordinatorService
 
 
 
 
     // MARK: Lifecycle
 
-    init(flowCoordinator: FlowCoordinator) {
-        self.flowCoordinator = flowCoordinator
+    init(flowCoordinatorService: FlowCoordinatorService) {
+        self.flowCoordinatorService = flowCoordinatorService
     }
 
 
     // MARK: Public
 
     func showModalView() {
-        flowCoordinator.finish()
+        flowCoordinatorService.showModalView()
     }
 
     func closeAll() {
-        flowCoordinator.finish()
+        flowCoordinatorService.closeAll()
     }
 }
