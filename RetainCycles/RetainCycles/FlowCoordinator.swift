@@ -16,9 +16,10 @@ final class FlowCoordinator {
     private var helpService: HelpService?
     private var retainService: RetainViewService?
     private var routingService: RetainRoutingService?
+    private var flowService: FlowCoordinatorService?
 
-    private var retainViewController: UIViewController?
-    private var modalViewController: UIViewController?
+    private weak var retainViewController: UIViewController?
+    private weak var modalViewController: UIViewController?
 
 
     // MARK: Lifecycle
@@ -37,7 +38,10 @@ final class FlowCoordinator {
     func start() {
         let vc = RetainViewController()
 
-        let helpService = HelpService(flowCoordinator: self)
+        let flowService = FlowCoordinatorService(flowCoordinator: self)
+        self.flowService = flowService
+
+        let helpService = HelpService(flowCoordinatorService: flowService)
         self.helpService = helpService
 
         let routingService = RetainRoutingService(helpService: helpService)
@@ -45,6 +49,7 @@ final class FlowCoordinator {
 
         let retainService = RetainViewService(routingService: routingService)
         self.retainService = retainService
+
 
         vc.retainViewService = retainService
         retainViewController = vc
